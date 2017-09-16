@@ -4,6 +4,7 @@ import asyncio
 from os.path import join, dirname
 import pytest
 import platform
+import os as system_os
 
 
 @pytest.mark.asyncio
@@ -79,3 +80,12 @@ def test_sendfile_socket(unused_tcp_port):
 
     yield from server.wait_closed()
 
+@pytest.mark.asyncio
+def test_listdir():
+    """Test the listdir call."""
+    directory = join(dirname(__file__), 'resources')
+    directory_contents = system_os.listdir(directory)
+
+    listdir_result = yield from aiofiles.os.listdir(directory)
+
+    assert listdir_result == directory_contents

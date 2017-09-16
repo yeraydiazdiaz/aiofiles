@@ -17,6 +17,7 @@ def wrap(func):
 
 
 stat = wrap(os.stat)
+listdir = wrap(os.listdir)
 
 if hasattr(os, "sendfile"):
     sendfile = wrap(os.sendfile)
